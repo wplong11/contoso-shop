@@ -1,4 +1,4 @@
-package com.contoso.inventory
+package com.contoso.account
 
 import io.swagger.v3.oas.annotations.media.Schema
 

@@ -1,0 +1,43 @@
+logging:
+  level:
+    com:
+      contoso: DEBUG
+
+springdoc:
+  packages-to-scan: com.contoso
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  swagger-ui:
+    path: /swagger
+    operations-sorter: method
+    tags-sorter: alpha
+    disable-swagger-default-url: true
+  title: Contoso Api
+  description: "Contoso Api 입니다"
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: coupons
+  session:
+    store-type: none
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1/root?useSSL=false&useUnicode=yes&characterEncoding=UTF-8
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    hikari:
+      maximum-pool-size: 8
+    username: root
+    password: 1234
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: true
+    hibernate:
+      format_sql: true
+      ddl-auto: validate
+    show-sql: true

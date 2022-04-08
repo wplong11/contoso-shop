@@ -3,6 +3,7 @@ package com.contoso.inventory.application.controller
 import com.contoso.inventory.FeedDto
 import com.contoso.inventory.RequestForApprovalDto
 import com.contoso.inventory.command.ApproveRequestForCreatingProductCommand
+import com.contoso.inventory.command.ApproveRequestForUpdatingProductCommand
 import com.contoso.inventory.command.RequestForCreatingProductCommand
 import com.contoso.inventory.command.RequestForUpdatingProductCommand
 import com.contoso.inventory.defaultObjectMapper
@@ -71,6 +72,21 @@ class RequestForApprovalControllerTest @Autowired constructor(
         val content = ApproveRequestForCreatingProductCommand.getExamples().random()
         val response = mockMvc.perform(
             post("/request-for-approval/execute/approve-request-for-creating-product-command")
+                .content(defaultObjectMapper.writeValueAsString(content))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+        )
+
+        // Assert
+        response.andExpect(status().isOk)
+    }
+
+    @Test
+    fun `sut executes ApproveRequestForUpdatingProductCommand correctly`() {
+        // Act
+        val content = ApproveRequestForUpdatingProductCommand.getExamples().random()
+        val response = mockMvc.perform(
+            post("/request-for-approval/execute/approve-request-for-updating-product-command")
                 .content(defaultObjectMapper.writeValueAsString(content))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)

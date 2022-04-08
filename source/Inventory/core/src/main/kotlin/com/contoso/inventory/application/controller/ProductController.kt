@@ -3,9 +3,12 @@ package com.contoso.inventory.application.controller
 
 import com.contoso.inventory.FeedDto
 import com.contoso.inventory.ProductDto
+import com.contoso.inventory.command.UpdateProductCommand
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
@@ -20,4 +23,10 @@ class ProductController {
             continuationToken = UUID.randomUUID().toString(),
         )
     }
+
+    @Operation(summary = "상품 수정 API")
+    @PostMapping("/products/execute/update-product-command")
+    fun updateProductCommand(
+        @RequestBody command: UpdateProductCommand
+    ): Unit = Unit
 }

@@ -1,6 +1,7 @@
 package com.contoso.inventory.application.controller
 
 import com.contoso.inventory.command.RequestForCreatingProductCommand
+import com.contoso.inventory.command.RequestForUpdatingProductCommand
 import com.contoso.inventory.defaultObjectMapper
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,6 +21,21 @@ class RequestForApprovalControllerTest @Autowired constructor(
         val content = RequestForCreatingProductCommand.getExamples().random()
         val response = mockMvc.perform(
             post("/request-for-approval/execute/request-for-creating-product-command")
+                .content(defaultObjectMapper.writeValueAsString(content))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+        )
+
+        // Assert
+        response.andExpect(status().isOk)
+    }
+
+    @Test
+    fun `sut executes RequestForUpdatingProductCommand correctly`() {
+        // Act
+        val content = RequestForUpdatingProductCommand.getExamples().random()
+        val response = mockMvc.perform(
+            post("/request-for-approval/execute/request-for-updating-product-command")
                 .content(defaultObjectMapper.writeValueAsString(content))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)

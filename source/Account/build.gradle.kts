@@ -13,7 +13,7 @@ plugins {
 }
 
 allprojects {
-    group = "com.contoso"
+    group = "com.contoso.account"
     version = "1.0-SNAPSHOT"
 
     repositories {

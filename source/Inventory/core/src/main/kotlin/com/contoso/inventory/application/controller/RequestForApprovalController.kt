@@ -2,6 +2,7 @@ package com.contoso.inventory.application.controller
 
 import com.contoso.inventory.FeedDto
 import com.contoso.inventory.RequestForApprovalDto
+import com.contoso.inventory.command.ApproveRequestForCreatingProductCommand
 import com.contoso.inventory.command.RequestForCreatingProductCommand
 import com.contoso.inventory.command.RequestForUpdatingProductCommand
 import io.swagger.v3.oas.annotations.Operation
@@ -33,5 +34,11 @@ class RequestForApprovalController {
     @PostMapping("/request-for-approval/execute/request-for-updating-product-command")
     fun requestForUpdatingProductCommand(
         @RequestBody command: RequestForUpdatingProductCommand
+    ): Unit = Unit
+
+    @Operation(summary = "Product 생성 요청 승인 API")
+    @PostMapping("/request-for-approval/execute/approve-request-for-creating-product-command")
+    fun approveRequestForCreatingProductCommand(
+        @RequestBody command: ApproveRequestForCreatingProductCommand
     ): Unit = Unit
 }
